@@ -1,0 +1,47 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+dataset = load("data.RData")
+df = data.frame(info_estudiantes)
+df
+```
+
+```{r}
+#1. ¿Qué tipo de dato es info_estudiantes? 
+class(info_estudiantes)
+```
+
+```{r}
+#2. ¿Cuantos elementos tiene info_estudiantes? 
+dim(df)
+#8000 filas y 3 columnas
+```
+
+```{r}
+#3. ¿Qué representa cada uno de los elementos de info_estudiantes?
+#Muestra el carnet, el promedio y el tipo
+```
+
+```{r}
+#4. ¿Cuál es la media de los estudiantes ingresados en el año 2019?
+mean(df[substr(df$carnet, 1,2) == "19",]$promedio)
+```
+
+```{r}
+#6. ¿Cuál es el mínimo de notas de aquellos estudiantes donde su carnet termina con los números 45 a 48?
+min(df[substr(df$carnet, 7, 8) >= 45 & substr(df$carnet, 7, 8) <= 48,]$promedio)
+```
+
+```{r}
+#7. ¿Cuál es la probabilidad de que un estudiante tipo A tenga una nota mayor a 85?
+(nrow(df[((df$tipo == "A") & (df$promedio) > 85),])/nrow(df))*100
+```
+
+```{r}
+#8. ¿Cuál es la probabilidad de que un estudiante tipo C haya ingresado en el año 2017 o 2019?
+(nrow(df[(df$tipo == "C"),])/nrow(df[substr(df$carnet, 1, 2) == 17 | substr(df$carnet, 1, 2) == 19,]))*100
+```
+
